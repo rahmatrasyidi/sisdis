@@ -21,9 +21,9 @@ $server->handle();
         return $pageURL;
   }
 
- if(curPageURL() == "http://localhost/sisdis/tugas2/client/meow.jpg"){
+ if(curPageURL() == "http://10.10.100.32/tugas2/client/meow.jpg"){
         $api = new RestClient(array(
-            'base_url' => "https://localhost/sisdis", 
+            'base_url' => "https://10.10.100.32/", 
             'format' => "json",
         ));
 
