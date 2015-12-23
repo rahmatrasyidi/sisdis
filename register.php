@@ -27,12 +27,12 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 			<div class="menu">
 			  <a class="toggleMenu" href="#"><img src="images/nav_icon.png" alt="" /></a>
 				<ul class="nav" id="nav">
-				   <li><a href="index.php" class="btn btn-warning">BERANDA</a></li>
+				   <li><a href="index.php" class="active">BERANDA</a></li>
 					<li><a href="ping.php" class="active">PING</a></li>
-					<li><a href="register.php" class="active">REGISTER</a></li>
+					<li><a href="register.php" class="btn btn-warning">REGISTER</a></li>
 					<li><a href="getSaldo.php" class="active">GET SALDO</a></li>
 					<li><a href="transfer.php" class="active">TRANSFER</a></li>
-					<li><a href="getTotalSaldo.php" class="active">GET TOTAL SALDO</a></li>
+					<li><a href="getTotalSaldo.php" class="">GET TOTAL SALDO</a></li>
 				   <div class="clear"></div>
 			    </ul>
 			</div>							
@@ -43,18 +43,39 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 		   </div>
 		 </div>
 		 <div class="header-bottom" id="home">
-			<div class="container" style="background: rgba(0, 0, 0, .7);font-size: 2em;">
-				<ul class="nav" id="nav">
-				    <li><a href="index.php">DAFTAR FUNGSI</a></li>
-				    <li><a href="ping.php">1. PING</a></li>
-					<li><a href="register.php">2. REGISTER</a></li>
-					<li><a href="getSaldo.php">3. GET SALDO</a></li>
-					<li><a href="transfer.php">4. TRANSFER</a></li>
-					<li><a href="getTotalSaldo.php">5. GET TOTAL SALDO</a></li>
-				   <div class="clear"></div>
-			    </ul>
+			<div class="container" style="background: rgba(82, 220, 242, .7);">
+				<form action="register.php" method="post" role="form"style="margin-bottom:20px;">
+					<div class="form-group">
+					  <p style="font-family: 'caviar_dreamsregular';color: #FFF;font-size: 2.7em;padding: 10px;width: 48%;margin: 0px auto 2%;" ><label for="usr">URL WSDL</label></p>
+					  <input type="text" class="form-control" name ="url" id="usr">
+					</div>
+					<div class="form-group">
+					  <p style="font-family: 'caviar_dreamsregular';color: #FFF;font-size: 2.7em;padding: 10px;width: 48%;margin: 0px auto 2%;" ><label for="usr1">USER ID</label></p>
+					  <input type="text" class="form-control" name ="npm" id="usr1">
+					</div>
+					<div class="form-group">
+					  <p style="font-family: 'caviar_dreamsregular';color: #FFF;font-size: 2.7em;padding: 10px;width: 48%;margin: 0px auto 2%;" ><label for="usr2">NAMA</label></p>
+					  <input type="text" class="form-control" name ="nama" id="usr2">
+					</div>
+					<div class="form-group">
+					  <p style="font-family: 'caviar_dreamsregular';color: #FFF;font-size: 2.7em;padding: 10px;width: 48%;margin: 0px auto 2%;" ><label for="usr2">IP DOMISILI</label></p>
+					  <input type="text" class="form-control" name ="ip" id="usr2">
+					</div>
+					<button type="submit" class="btn btn-default">Submit</button>
+				</form>
+				<?php
+					if($_SERVER['REQUEST_METHOD'] == 'POST')
+					{
+						$wsdl = $_POST["url"];
+						$npm = $_POST["npm"];
+						$nama = $_POST["nama"];
+						$ip = $_POST["ip"];
+						ini_set("soap.wsdl_cache_enabled", "0");
+						$client = new SoapClient($wsdl, array('trace'=>1));
+						$client->register($npm,$nama,$ip);
+					}
+				?>
 			</div>
-		 
 		 </div>
 	</div>
 	<!--end header-->
@@ -66,5 +87,6 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 	  	</div>
 	  </div>
 	  <!--end contact-->
+
 </body>
 </html>
